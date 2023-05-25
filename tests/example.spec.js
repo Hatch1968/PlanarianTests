@@ -48,7 +48,7 @@ test('Planarian Login/Logout', async ({ page }) => {
 });
 
 
-// Note: This Test is currently broken
+// Note: This Test is currently broken. Also not adding new projects with autmoation for now since there is no good way to delete them
 test('Planarian Add/Delete New Project', async ({ page }) => {
 	await page.goto('https://www.planarian.xyz/login');
 
@@ -81,24 +81,6 @@ test('Planarian Add/Delete New Project', async ({ page }) => {
 	//await page.waitForSelector(`div:has-text("${newProjectName}")`);
 	//
 	
-	const hrefValue = await page.evaluate((text) => {
-  const divElements = Array.from(document.querySelectorAll('div'));
-  const targetDivIndex = divElements.findIndex((div) => div.textContent.includes(text));
-  if (targetDivIndex !== -1 && targetDivIndex > 0) {
-    const precedingHref = divElements[targetDivIndex - 1].previousElementSibling.getAttribute('href');
-    return precedingHref;
-  }
-  return null;
-}, newProjectName);
-
-console.log('First preceding href value:', hrefValue);
-	
-	//await page.waitForSelector('div:has-text("Project Members")');
-	//await page.click('span:has-text("Delete")');
-	//await page.waitForSelector('button span:has-text("OK")');
-	//await page.click('button span:has-text("OK")');
-
-	//await expect(page.locator("text=Projects")).toBeVisible();
 	
 	// Logout 
 	await page.click('span:has-text("Logout")');
