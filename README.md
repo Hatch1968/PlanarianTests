@@ -11,3 +11,5 @@ You will need to add a file called "credentials.json" to the project that has a 
 }
 
 This is your test user.
+
+**Note: The Planarian website cannot currently handle much load, so it is recommended to only run 1 worker at a time.**
