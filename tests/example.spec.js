@@ -12,6 +12,7 @@ async function readCredentialsFromJson() {
     const username = credentials.username;
     const password = credentials.password;
 
+	console.log('Login Email: ', username);
     return { username, password };
   } catch (error) {
     console.error('Error reading credentials:', error);
@@ -33,7 +34,7 @@ test('Planarian Login/Logout', async ({ page }) => {
 	await expect(page).toHaveTitle(/Planarian/);
 	await expect(page).toHaveURL(/.*login/);
   
-  
+	
 	await page.fill('#basic_emailAddress', username);
     await page.fill('#basic_password', password);
     await page.click('button span:has-text("Login")');
