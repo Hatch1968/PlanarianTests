@@ -9,3 +9,5 @@ You will need to add a file called "credentials.json" to the project that has a 
   "username": "example@example.com",
   "password": "moust@che"
 }
+
+This is your test user.
