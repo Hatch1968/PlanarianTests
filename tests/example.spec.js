@@ -46,7 +46,9 @@ test('Planarian Login/Logout', async ({ page }) => {
   
 });
 
-test.only('Planarian Add/Delete New Project', async ({ page }) => {
+
+// Note: This Test is currently broken
+test.('Planarian Add/Delete New Project', async ({ page }) => {
 	await page.goto('https://www.planarian.xyz/login');
 
 	const { username, password } = await readCredentialsFromJson();
