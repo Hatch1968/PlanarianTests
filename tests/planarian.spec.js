@@ -5,7 +5,7 @@ const fs = require('fs');
 async function readCredentialsFromJson() {
   try {
     // Read the JSON file
-    const fileData = fs.readFileSync('credentials.json');
+    const fileData = fs.readFileSync('credentials.json', 'utf8');
    
     const credentials = JSON.parse(fileData);
   
