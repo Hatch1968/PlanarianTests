@@ -26,7 +26,7 @@ async function generateRandomStringWithNumber() {
 }
 
 
-test.only('Planarian Login/Logout', async ({ page }) => {
+test('Planarian Login/Logout', async ({ page }) => {
 	await page.goto('https://www.planarian.xyz/login');
 
 	const { username, password } = await readCredentialsFromJson();
@@ -47,9 +47,7 @@ test.only('Planarian Login/Logout', async ({ page }) => {
   
 });
 
-
-// Note: This Test is currently broken. Also not adding new projects with autmoation for now since there is no good way to delete them
-test('Planarian Add/Delete New Project', async ({ page }) => {
+test('Navigate to Existing Project', async ({ page }) => {
 	await page.goto('https://www.planarian.xyz/login');
 
 	const { username, password } = await readCredentialsFromJson();
@@ -64,23 +62,18 @@ test('Planarian Add/Delete New Project', async ({ page }) => {
 
 	await expect(page).toHaveURL(/.*projects/);
   
+	// Note: This Code is currently disabled since Adding New Projects will junk up the Database too much.
 	//await page.click('button span:has-text("Add")');
-	
 	//await expect(page.locator("text=New Project")).toBeVisible();
-
 	//const newProjectName = await generateRandomStringWithNumber();
 
 	const newProjectName = "Automation_480705429";
 
 	console.log('Project Name: ', newProjectName);
-	/*
-	await page.fill('#Name', newProjectName);
+
+	await page.locator(`//div[text()="${newProjectName}"]/ancestor::a`).click();
 	
-	await page.click('button span:has-text("OK")');
-	*/
-	//await page.waitForSelector(`div:has-text("${newProjectName}")`);
-	//
-	
+	await expect(page.locator("text=Project Members")).toBeVisible();
 	
 	// Logout 
 	await page.click('span:has-text("Logout")');
