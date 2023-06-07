@@ -82,4 +82,28 @@ test('Navigate to Existing Project', async ({ page }) => {
   
 });
 
+test.only('Advanced Search', async ({ page }) => {
+	await page.goto('https://www.planarian.xyz/login');
 
+	const { username, password } = await readCredentialsFromJson();
+	// Expect a title "to contain" a substring.
+	await expect(page).toHaveTitle(/Planarian/);
+	await expect(page).toHaveURL(/.*login/);
+  
+	
+	await page.fill('#basic_emailAddress', username);
+    await page.fill('#basic_password', password);
+    await page.click('button span:has-text("Login")');
+
+	await expect(page).toHaveURL(/.*projects/, { timeout: 10000 });
+  
+	await page.click('button span:has-text("Advanced")');
+	await expect(page.locator("text=Number of Trips")).toBeVisible();
+	await page.click('button[aria-label="Close"]');
+
+
+	await page.click('span:has-text("Logout")');
+	await expect(page).toHaveURL(/.*login/);
+	
+  
+});
