@@ -82,7 +82,7 @@ test('Navigate to Existing Project', async ({ page }) => {
   
 });
 
-test.only('Advanced Search', async ({ page }) => {
+test('Advanced Search', async ({ page }) => {
 	await page.goto('https://www.planarian.xyz/login');
 
 	const { username, password } = await readCredentialsFromJson();
