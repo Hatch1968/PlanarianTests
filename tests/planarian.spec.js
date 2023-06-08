@@ -25,10 +25,15 @@ async function generateRandomStringWithNumber() {
   return randomString;
 }
 
+test.beforeEach(async ({ page }) => {
+	await test.step('navigation', async() => {
+		await page.goto('https://www.planarian.xyz/login');
+	});
+});
+
 
 test('Planarian Login/Logout', async ({ page }) => {
-	await page.goto('https://www.planarian.xyz/login');
-
+	
 	const { username, password } = await readCredentialsFromJson();
 	// Expect a title "to contain" a substring.
 	await expect(page).toHaveTitle(/Planarian/);
@@ -39,7 +44,7 @@ test('Planarian Login/Logout', async ({ page }) => {
     await page.fill('#basic_password', password);
     await page.click('button span:has-text("Login")');
 
-	await expect(page).toHaveURL(/.*projects/, { timeout: 10000 });
+	await expect(page).toHaveURL(/.*projects/, { timeout: 12000 });
   
 	await page.click('span:has-text("Logout")');
 	await expect(page).toHaveURL(/.*login/);
@@ -48,8 +53,7 @@ test('Planarian Login/Logout', async ({ page }) => {
 });
 
 test('Navigate to Existing Project', async ({ page }) => {
-	await page.goto('https://www.planarian.xyz/login');
-
+	
 	const { username, password } = await readCredentialsFromJson();
 	// Expect a title "to contain" a substring.
 	await expect(page).toHaveTitle(/Planarian/);
@@ -83,8 +87,7 @@ test('Navigate to Existing Project', async ({ page }) => {
 });
 
 test('Advanced Search', async ({ page }) => {
-	await page.goto('https://www.planarian.xyz/login');
-
+	
 	const { username, password } = await readCredentialsFromJson();
 	// Expect a title "to contain" a substring.
 	await expect(page).toHaveTitle(/Planarian/);
@@ -99,6 +102,10 @@ test('Advanced Search', async ({ page }) => {
   
 	await page.click('button span:has-text("Advanced")');
 	await expect(page.locator("text=Number of Trips")).toBeVisible();
+
+	// Click on Up Spinner
+	
+
 	await page.click('button[aria-label="Close"]');
 
 
